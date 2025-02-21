@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasGrouping", "AtlasGrouping\AtlasGrouping.csproj", "{A08AF233-DF82-4831-BE40-47B75C30EF47}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "HistogramViewer", "HistogramViewer\HistogramViewer.pyproj", "{FB5AB2D9-C581-47AE-BC4A-1D9EE27B3873}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A08AF233-DF82-4831-BE40-47B75C30EF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A08AF233-DF82-4831-BE40-47B75C30EF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A08AF233-DF82-4831-BE40-47B75C30EF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A08AF233-DF82-4831-BE40-47B75C30EF47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB5AB2D9-C581-47AE-BC4A-1D9EE27B3873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB5AB2D9-C581-47AE-BC4A-1D9EE27B3873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51041A43-9F06-4CC5-8474-9E6BE628B30D}
+	EndGlobalSection
+EndGlobal
