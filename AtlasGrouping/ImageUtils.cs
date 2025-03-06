@@ -23,24 +23,16 @@ namespace AtlasGrouping
             {
                 var image = new Bitmap(filePath);
 
-                double[] histogram = ComputeNormalizedHistogram(image, hueBins, satBins, valBins);
                 imageAssets.Add(new ImageAsset
                 {
                     Id = Path.GetFileNameWithoutExtension(filePath),
                     FilePath = filePath,
-                    ColorHistogram = histogram
                 });
 
                 image.Dispose(); // Free memory
             });
 
             return [.. imageAssets];
-        }
-
-        //Just an example
-        private static double[] ComputeNormalizedHistogram(Bitmap image, int hueBins, int satBins, int valBins)
-        {
-            return Array.Empty<double>();
         }
 
         //Just an example
