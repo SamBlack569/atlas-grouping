@@ -20,8 +20,10 @@ namespace AtlasGrouping
 
             foreach (var asset in assets)
             {
-                Console.WriteLine($"Loaded: {asset.Id}, Size: {asset.Width}x{asset.Height}, ColorInfo: {"Nothing yet"}");
+                int hue = ImageUtils.Histogram(asset);
+                Console.WriteLine($"Loaded: {asset.Id}, Size: {asset.Width}x{asset.Height}, Hue dominant: {hue}");
             }
+
 
 
             var builder = new AtlasBuilder();

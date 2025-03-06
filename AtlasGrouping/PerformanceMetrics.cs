@@ -48,6 +48,7 @@ namespace AtlasGrouping
         }
 
         // Compute the average histogram distance among all assets in an atlas.
+        /*
         public static double ComputeAverageHistogramDistance(TextureAtlas atlas)
         {
             var entries = atlas.PlacedEntries;
@@ -98,6 +99,6 @@ namespace AtlasGrouping
                 atlasIndex++;
             }
             return metrics;
-        }
+        }*/
     }
 }

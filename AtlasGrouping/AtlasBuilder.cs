@@ -16,7 +16,7 @@ namespace AtlasGrouping
             Stopwatch stopwatch = Stopwatch.StartNew();
             List<TextureAtlas> atlases = GenerateAtlases(assets, atlasWidth, atlasHeight);
             stopwatch.Stop();
-
+            /*
             PerformanceMetrics metrics = MetricsCalculator.GatherMetrics(atlases, stopwatch.Elapsed);
             // Output or log the metrics.
             Console.WriteLine($"Total Atlases: {metrics.TotalAtlases}");
@@ -26,7 +26,7 @@ namespace AtlasGrouping
                 Console.WriteLine($"Atlas {atlasMetric.AtlasIndex}: Size {atlasMetric.AtlasWidth}x{atlasMetric.AtlasHeight}, " +
                                   $"Assets: {atlasMetric.NumberOfAssets}, " +
                                   $"Avg. Histogram Distance: {atlasMetric.AverageHistogramDistance:F2}");
-            }
+            }*/
         }
 
 

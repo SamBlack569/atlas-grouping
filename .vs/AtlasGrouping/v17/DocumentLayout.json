@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\imageutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\imageutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\performancemetrics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\performancemetrics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\atlasbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\atlasbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB5AB2D9-C581-47AE-BC4A-1D9EE27B3873}|HistogramViewer\\HistogramViewer.pyproj|C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\HistogramViewer\\HistogramViewer.py||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -17,18 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\datastructures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\datastructures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\imageutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\imageutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\performancemetrics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|solutionrelative:atlasgrouping\\performancemetrics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A08AF233-DF82-4831-BE40-47B75C30EF47}|AtlasGrouping\\AtlasGrouping.csproj|c:\\users\\user\\documentos\\estagio\\atlasgrouping\\atlasgrouping\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
@@ -42,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 215,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,20 +50,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\.gitignore",
-              "RelativeDocumentMoniker": "AtlasGrouping\\.gitignore",
-              "ToolTip": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\.gitignore",
-              "RelativeToolTip": "AtlasGrouping\\.gitignore",
-              "ViewState": "AgIAAIABAAAAAAAAAAAAAIIBAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-03-06T12:26:35.205Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "HistogramViewer.py",
               "DocumentMoniker": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\HistogramViewer\\HistogramViewer.py",
               "RelativeDocumentMoniker": "HistogramViewer\\HistogramViewer.py",
@@ -80,7 +63,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "README.md",
               "DocumentMoniker": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\README.md",
               "RelativeDocumentMoniker": "AtlasGrouping\\README.md",
@@ -92,64 +75,68 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "ImageUtils.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\ImageUtils.cs",
               "RelativeDocumentMoniker": "AtlasGrouping\\ImageUtils.cs",
               "ToolTip": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\ImageUtils.cs",
               "RelativeToolTip": "AtlasGrouping\\ImageUtils.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAQwCUAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAQwDcAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T14:59:34.255Z"
+              "WhenOpened": "2025-02-18T14:59:34.255Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AtlasBuilder.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\AtlasBuilder.cs",
               "RelativeDocumentMoniker": "AtlasGrouping\\AtlasBuilder.cs",
               "ToolTip": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\AtlasBuilder.cs",
               "RelativeToolTip": "AtlasGrouping\\AtlasBuilder.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-18T14:44:08.422Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "PerformanceMetrics.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\PerformanceMetrics.cs",
               "RelativeDocumentMoniker": "AtlasGrouping\\PerformanceMetrics.cs",
               "ToolTip": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\PerformanceMetrics.cs",
               "RelativeToolTip": "AtlasGrouping\\PerformanceMetrics.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGAAAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAcwGUAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T14:35:47.137Z"
+              "WhenOpened": "2025-02-18T14:35:47.137Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "DataStructures.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\DataStructures.cs",
               "RelativeDocumentMoniker": "AtlasGrouping\\DataStructures.cs",
               "ToolTip": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\DataStructures.cs",
               "RelativeToolTip": "AtlasGrouping\\DataStructures.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T14:32:10.711Z"
+              "WhenOpened": "2025-02-18T14:32:10.711Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\Program.cs",
               "RelativeDocumentMoniker": "AtlasGrouping\\Program.cs",
               "ToolTip": "C:\\Users\\USER\\Documentos\\Estagio\\AtlasGrouping\\AtlasGrouping\\Program.cs",
               "RelativeToolTip": "AtlasGrouping\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T14:31:15.177Z"
+              "WhenOpened": "2025-02-18T14:31:15.177Z",
+              "EditorCaption": ""
             }
           ]
         }
