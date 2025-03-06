@@ -43,26 +43,48 @@ namespace AtlasGrouping
 
             int[] hueHistogram = new int[hueBins];
             
-            int width = img.Width;
-            int height = img.Height;
+            int width = asset.Width;
+            int height = asset.Height;
+
             int pixelCount = 0;
+            int blackPixels = 0;
+            int whitePixels = 0;
+            int grayPixels = 0;
 
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++) 
                 {
                     Color pixel = img.GetPixel(x, y);
+
+                    if(pixel.A == 0) continue; // Skip transparent pixels
+
                     float h, s, v;
                     RgbToHsv(pixel, out h, out s, out v);
 
-                    if (s > 0.05)
+                    if (s <= 0.05) // Low saturation, likely a shade of gray, black, or white
                     {
-                        int hueBin = (int)(h / 360.0 * hueBins);
-                        hueHistogram[hueBin]++;
-                        pixelCount++;
+                        if (v <= 0.1) blackPixels++; // Too dark -> black
+
+                        else if (v >= 0.9) whitePixels++; // Too bright -> white
+
+                        else grayPixels++; // In between -> gray
+
+                        continue;
                     }
+
+                    // Map hue to bins
+                    int hueBin = (int)((h / 360.0) * hueBins);
+                    hueBin = Math.Min(hueBin, hueBins - 1); // Ensure it doesn't go out of bounds
+                    hueHistogram[hueBin]++;
+                    pixelCount++;
                 }
             }
+
+            // Check if black, white, or gray is dominant
+            if (blackPixels > pixelCount * 0.7) return -2; // Black 
+            if (whitePixels > pixelCount * 0.7) return -3; // White 
+            if (grayPixels > pixelCount * 0.7) return -4; // Gray 
 
             if (pixelCount == 0)
             {
@@ -70,7 +92,10 @@ namespace AtlasGrouping
                 return -1;
             }
 
-            return Array.IndexOf(hueHistogram, hueHistogram.Max());
+            // Find the hue bin with the most pixels (dominant hue)
+            int dominantHueBin = Array.IndexOf(hueHistogram, hueHistogram.Max());
+
+            return dominantHueBin;
         }
 
         public static void RgbToHsv(Color color, out float h, out float s, out float v)
