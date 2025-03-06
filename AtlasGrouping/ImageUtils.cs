@@ -27,6 +27,8 @@ namespace AtlasGrouping
                 {
                     Id = Path.GetFileNameWithoutExtension(filePath),
                     FilePath = filePath,
+                    Width = image.Width,    
+                    Height = image.Height,  
                 });
 
                 image.Dispose(); // Free memory
