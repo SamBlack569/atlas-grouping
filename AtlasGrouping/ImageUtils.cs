@@ -57,16 +57,16 @@ namespace AtlasGrouping
                 {
                     Color pixel = img.GetPixel(x, y);
 
-                    if(pixel.A == 0) continue; // Skip transparent pixels
+                    if(pixel.A < 50) continue; // Skip transparent pixels and almost transparent pixels
 
                     float h, s, v;
                     RgbToHsv(pixel, out h, out s, out v);
 
-                    if (s <= 0.05) // Low saturation, likely a shade of gray, black, or white
+                    if (s <= 0.15) // Low saturation, likely a shade of gray, black, or white
                     {
-                        if (v <= 0.1) blackPixels++; // Too dark -> black
+                        if (v <= 0.05) blackPixels++; // Too dark -> black
 
-                        else if (v >= 0.9) whitePixels++; // Too bright -> white
+                        else if (v >= 0.95) whitePixels++; // Too bright -> white
 
                         else grayPixels++; // In between -> gray
 
@@ -110,12 +110,22 @@ namespace AtlasGrouping
 
             h = 0;
 
-            if (delta > 0)
+            if (delta == 0)
             {
-                if (max == r) h = 60 * (((g - b) / delta) % 6);
-                else if (max == g) h = 60 * (((b - r) / delta) + 2);
-                else if (max == b) h = 60 * (((r - g) / delta) + 4);
-
+                h = 0;
+            }
+            else if (max == r)
+            {
+                h = 60f * ((g - b) / delta);
+                if (h < 0) h += 360;
+            }
+            else if (max == g)
+            {
+                h = 60f * ((b - r) / delta + 2);
+            }
+            else if (max == b)
+            {
+                h = 60f * ((r - g) / delta + 4);
             }
 
             if (h < 0) h += 360;
