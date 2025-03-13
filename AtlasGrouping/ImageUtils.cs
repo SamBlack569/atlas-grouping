@@ -133,5 +133,70 @@ namespace AtlasGrouping
             s = (max == 0) ? 0 : (delta / max);
             v = max;
         }
+
+        public static List<HueAsset> SortHueAssetList(List<HueAsset> hueAssetList, int atlasWidth, int atlasHeight, Dictionary<string, ImageAsset> assetLookup)
+        {
+            var filteredList = new List<HueAsset>();
+
+            foreach (var asset in hueAssetList)
+            {
+                if (!assetLookup.TryGetValue(asset.AssetId, out var original))
+                {
+                    Console.WriteLine($"Warning: Asset {asset.AssetId} not found in lookup.");
+                    continue;
+                }
+
+                if (original.Width > atlasWidth || original.Height > atlasHeight)
+                {
+                    Console.WriteLine($"Warning: Asset {asset.AssetId} is too large for the atlas and will not be added.");
+                }
+                else
+                {
+                    filteredList.Add(asset);
+                }
+            }
+
+            // Separate normal hues from special hues
+            var normalHues = filteredList.Where(a => a.Hue >= 0).OrderBy(a => a.Hue).ToList();
+            var specialHues = filteredList.Where(a => a.Hue < 0).ToList(); // -2, -3, -4
+
+            // Add special hues to the end of the list
+            var sortedList = new List<HueAsset>();
+            sortedList.AddRange(normalHues);
+            sortedList.AddRange(specialHues);
+
+            return sortedList;
+        }
+
+        public static List<List<string>> Separate(List<HueAsset> sortedList, int numberOfRanges, int hueBins = 360)
+        {
+            var listOfSubLists = new List<List<string>>();
+
+            // Initialize sublists
+            for (int i = 0; i < numberOfRanges; i++)
+                listOfSubLists.Add(new List<string>());
+
+            // Calculate range size
+            double rangeSize = hueBins / (double)numberOfRanges;
+
+            foreach (var asset in sortedList)
+            {
+                if (asset.Hue < 0)
+                {
+                    // Special Hue (-2 Black, -3 White, -4 Gray)
+                    continue;
+                }
+
+                int rangeIndex = (int)(asset.Hue / rangeSize);
+                if (rangeIndex >= numberOfRanges)
+                    rangeIndex = numberOfRanges - 1; // Ensure it doesn't go out of bounds
+
+                listOfSubLists[rangeIndex].Add(asset.AssetId);
+            }
+
+            return listOfSubLists;
+        }
+
+
     }
 }
