@@ -13,7 +13,7 @@ namespace AtlasGrouping
 
             int atlasWidth = 2048;
             int atlasHeight = 2048;
-            int numberOfRanges = 6; // Number of hue ranges to split the assets into
+            int hueBins = 36; // 
 
             List<ImageAsset> assets = ImageUtils.LoadImageAssetsFromDirectory(imageFolder);
 
@@ -29,27 +29,29 @@ namespace AtlasGrouping
 
             foreach (var asset in assets)
             {
-                int hue = ImageUtils.Histogram(asset);
+                int hue = ImageUtils.Histogram(asset, hueBins);
                 Console.WriteLine($"Loaded: {asset.Id}, Size: {asset.Width}x{asset.Height}, Hue dominant: {hue}");
 
                 hueAssetList.Add(new HueAsset { AssetId = asset.Id, Hue = hue });
             }
 
             // Sort the assets by hue
-            var sortedHueAssets = ImageUtils.SortHueAssetList(hueAssetList, atlasWidth, atlasHeight, assetLookup);
+            var sortedHueAssets = ImageUtils.FilterHueAssetList(hueAssetList, atlasWidth, atlasHeight, assetLookup);
 
+            /*
             Console.WriteLine("\n--- Sorted Hue Assets ---");
             foreach (var ha in sortedHueAssets)
             {
                 Console.WriteLine($"Asset: {ha.AssetId}, Hue: {ha.Hue}");
             }
+            */
 
-            var separatedLists = ImageUtils.Separate(sortedHueAssets, numberOfRanges);
+            var separatedLists = ImageUtils.Separate(sortedHueAssets, hueBins);
 
-            Console.WriteLine("\n--- Grouped by Hue Range ---");
+            Console.WriteLine("\n--- Grouped by Hue ---");
             for (int i = 0; i < separatedLists.Count; i++)
             {
-                Console.WriteLine($"Range {i}: {string.Join(", ", separatedLists[i])}");
+                Console.WriteLine($"Index {i}: {string.Join(", ", separatedLists[i])}");
             }
 
             var builder = new AtlasBuilder();

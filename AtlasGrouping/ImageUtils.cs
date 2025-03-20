@@ -37,7 +37,7 @@ namespace AtlasGrouping
             return [.. imageAssets];
         }
 
-        public static int Histogram(ImageAsset asset, int hueBins = 36)
+        public static int Histogram(ImageAsset asset, int hueBins)
         {
             var img = new Bitmap(asset.FilePath); // Load image from asset file path
 
@@ -82,9 +82,9 @@ namespace AtlasGrouping
             }
 
             // Check if black, white, or gray is dominant
-            if (blackPixels > pixelCount * 0.7) return -2; // Black 
-            if (whitePixels > pixelCount * 0.7) return -3; // White 
-            if (grayPixels > pixelCount * 0.7) return -4; // Gray 
+            if (blackPixels > pixelCount * 0.5) return -2; // Black 
+            if (whitePixels > pixelCount * 0.5) return -3; // White 
+            if (grayPixels > pixelCount * 0.5) return -4; // Gray 
 
             if (pixelCount == 0)
             {
@@ -134,7 +134,7 @@ namespace AtlasGrouping
             v = max;
         }
 
-        public static List<HueAsset> SortHueAssetList(List<HueAsset> hueAssetList, int atlasWidth, int atlasHeight, Dictionary<string, ImageAsset> assetLookup)
+        public static List<HueAsset> FilterHueAssetList(List<HueAsset> hueAssetList, int atlasWidth, int atlasHeight, Dictionary<string, ImageAsset> assetLookup)
         {
             var filteredList = new List<HueAsset>();
 
@@ -168,30 +168,38 @@ namespace AtlasGrouping
             return sortedList;
         }
 
-        public static List<List<string>> Separate(List<HueAsset> sortedList, int numberOfRanges, int hueBins = 360)
+        public static List<List<string>> Separate(List<HueAsset> sortedList, int hueBins)
         {
             var listOfSubLists = new List<List<string>>();
 
             // Initialize sublists
-            for (int i = 0; i < numberOfRanges; i++)
+            for (int i = 0; i < hueBins + 3; i++)  // plus 3 for (black, white and gray)
                 listOfSubLists.Add(new List<string>());
 
-            // Calculate range size
-            double rangeSize = hueBins / (double)numberOfRanges;
 
             foreach (var asset in sortedList)
             {
+                int idx;
+
                 if (asset.Hue < 0)
                 {
                     // Special Hue (-2 Black, -3 White, -4 Gray)
-                    continue;
+                    idx = hueBins + (int)(-asset.Hue) -2;
+                    // Black index = 36, White index = 37, Gray index = 38
+                }
+                else
+                {
+                    idx = (int)asset.Hue;
                 }
 
-                int rangeIndex = (int)(asset.Hue / rangeSize);
-                if (rangeIndex >= numberOfRanges)
-                    rangeIndex = numberOfRanges - 1; // Ensure it doesn't go out of bounds
-
-                listOfSubLists[rangeIndex].Add(asset.AssetId);
+                if (idx >= 0 && idx < listOfSubLists.Count)
+                {
+                    listOfSubLists[idx].Add(asset.AssetId);
+                }
+                else
+                {
+                    Console.WriteLine($"[Warning] Hue index {idx} is out of bounds for asset {asset.AssetId} (Hue: {asset.Hue})");
+                }
             }
 
             return listOfSubLists;
