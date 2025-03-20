@@ -51,12 +51,16 @@ namespace AtlasGrouping
             Console.WriteLine("\n--- Grouped by Hue ---");
             for (int i = 0; i < separatedLists.Count; i++)
             {
-                Console.WriteLine($"Index {i}: {string.Join(", ", separatedLists[i])}");
+                Console.WriteLine($"Hue Group {i}: {string.Join(", ", separatedLists[i])}");
             }
 
             var builder = new AtlasBuilder();
 
-            builder.RunGenerationAndMetrics(assets, 2048,2048);
+            // Now generate the atlases based on the assets grouped by hue
+            var atlases = builder.GenerateAtlases(separatedLists, assetLookup, atlasWidth, atlasHeight);
+
+            // Save the atlas images as .png files
+            builder.SaveAtlasesAsImages(atlases, "./output_atlases");
         }
     }
 }
