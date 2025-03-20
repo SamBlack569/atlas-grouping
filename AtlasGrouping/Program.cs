@@ -9,7 +9,16 @@ namespace AtlasGrouping
             Console.WriteLine("---- Atlas Builder ----");
 
 
-            string imageFolder = "./images";
+            // Ask user to input the image folder path
+            Console.Write("Enter the path to the image folder: ");
+            string imageFolder = Console.ReadLine()?.Trim();
+
+            // Check if the folder exists
+            if (string.IsNullOrEmpty(imageFolder) || !Directory.Exists(imageFolder))
+            {
+                Console.WriteLine("❌ Error: The specified folder does not exist.");
+                return;
+            }
 
             int atlasWidth = 2048;
             int atlasHeight = 2048;
