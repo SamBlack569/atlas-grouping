@@ -58,16 +58,16 @@ namespace AtlasGrouping
                         currentX = 0;
                         currentY += currentRowHeight;
                         currentRowHeight = 0;
+                    }
 
-                        // Start a new atlas if height overflows
-                        if (currentY + asset.Height > atlasHeight)
-                        {
-                            // Start a new atlas if height overflows 
-                            allAtlases.Add(currentAtlas);
-                            currentAtlas = new TextureAtlas { AtlasWidth = atlasWidth, AtlasHeight = atlasHeight };
-                            currentX = 0;
-                            currentY = 0;
-                        }
+                    // Start a new atlas if height overflows
+                    if (currentY + asset.Height > atlasHeight)
+                    {
+                        // Start a new atlas if height overflows 
+                        allAtlases.Add(currentAtlas);
+                        currentAtlas = new TextureAtlas { AtlasWidth = atlasWidth, AtlasHeight = atlasHeight };
+                        currentX = 0;
+                        currentY = 0;
                     }
 
                     // Add asset in current atlas
