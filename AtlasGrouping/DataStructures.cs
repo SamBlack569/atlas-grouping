@@ -41,4 +41,10 @@ namespace AtlasGrouping
         public required double Hue { get; set; } // Hue value
         public required string AssetId { get; set; } // Unique identifier of the asset
     }
+    
+    public class Gap
+    {
+        public int Index { get; set; }
+        public int Size { get; set; }
+    }
 }

@@ -39,10 +39,57 @@ namespace AtlasGrouping
        
             TextureAtlas currentAtlas = new TextureAtlas { AtlasWidth = atlasWidth, AtlasHeight = atlasHeight };
 
-            int startIndex = (int)Math.Floor(0.95 * hueBins); // Start at 95% of the bins
+            // Calculate the total area of all assets
+            int totalAssetArea = assetSubLists.Sum(sublist => sublist.Sum(assetId =>
+            {
+                if (assetLookup.TryGetValue(assetId, out var asset))
+                {
+                    return asset.Width * asset.Height;
+                }
+                return 0;
+            }));
+
+            int atlasArea = atlasWidth * atlasHeight;
+            int minAtlases = (int)Math.Ceiling((double)totalAssetArea / atlasArea); // Minimum number of atlases required
+
+            List<int> subListsSizes = assetSubLists.Select(subList => subList.Count).ToList();
+
+            int zeroscount = 0;
+
+            List<Gap> gaps = new List<Gap>();
+
+            for (int i = 0; i < subListsSizes.Count; i++)
+            {
+                int size = subListsSizes[i];
+
+                if (size > 0)
+                {
+                    if (zeroscount > 0)
+                    {
+                        Gap gap = new Gap { Index = i, Size = zeroscount };
+                        zeroscount = 0;
+                        gaps.Add(gap);
+                        Console.WriteLine($"Gap at index {gap.Index} with size {gap.Size}");
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    zeroscount++;
+                }
+
+            }
+
+            int maxGapSize = gaps.Max(gap => gap.Size);
+            int maxGapIndex = gaps.FindIndex(gap => gap.Size == maxGapSize);
+
+            int startIndex = maxGapIndex; // Start after the largest gap
             List<List<string>> reorderedSubLists = new List<List<string>>();
 
-            // Reorder the sublists to start from the first red hue - 95% of 360 degrees
+            
             for (int i = 0; i < hueBins; i++)
             {
                 int index = (startIndex + i) % hueBins;
