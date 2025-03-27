@@ -36,7 +36,7 @@ namespace AtlasGrouping
         {
             // ---- Just an example -----
             List<TextureAtlas> allAtlases = new List<TextureAtlas>();
-       
+
             TextureAtlas currentAtlas = new TextureAtlas { AtlasWidth = atlasWidth, AtlasHeight = atlasHeight };
 
             // Calculate the total area of all assets
@@ -54,39 +54,53 @@ namespace AtlasGrouping
 
             List<int> subListsSizes = assetSubLists.Select(subList => subList.Count).ToList();
 
-            int zeroscount = 0;
+            // Find if doesnt exist 0 in subListsSizes
+            int numberOfGaps = subListsSizes.Count - subListsSizes.Count(subListSize => subListSize > 0);
 
-            List<Gap> gaps = new List<Gap>();
+            // Start index for placing assets in the atlas
+            int startIndex;
 
-            for (int i = 0; i < subListsSizes.Count; i++)
+            if (numberOfGaps > 0)
             {
-                int size = subListsSizes[i];
+                int zeroscount = 0;
 
-                if (size > 0)
+                List<Gap> gaps = new List<Gap>();
+
+                for (int i = 0; i < subListsSizes.Count; i++)
                 {
-                    if (zeroscount > 0)
+                    int size = subListsSizes[i];
+
+                    if (size > 0)
                     {
-                        Gap gap = new Gap { Index = i, Size = zeroscount };
-                        zeroscount = 0;
-                        gaps.Add(gap);
-                        Console.WriteLine($"Gap at index {gap.Index} with size {gap.Size}");
+                        if (zeroscount > 0)
+                        {
+                            Gap gap = new Gap { Index = i, Size = zeroscount };
+                            zeroscount = 0;
+                            gaps.Add(gap);
+                            Console.WriteLine($"Gap at index {gap.Index} with size {gap.Size}");
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
                     else
                     {
-                        continue;
+                        zeroscount++;
                     }
-                }
-                else
-                {
-                    zeroscount++;
+
                 }
 
+                int maxGapSize = gaps.Max(gap => gap.Size);
+                int maxGapIndex = gaps.FindIndex(gap => gap.Size == maxGapSize);
+
+                startIndex = maxGapIndex; // Start after the largest gap
             }
-
-            int maxGapSize = gaps.Max(gap => gap.Size);
-            int maxGapIndex = gaps.FindIndex(gap => gap.Size == maxGapSize);
-
-            int startIndex = maxGapIndex; // Start after the largest gap
+            else // If there are no gaps, start at 95% of the bins
+            {
+                startIndex = (int)Math.Floor(0.95 * hueBins);
+            }
+           
             List<List<string>> reorderedSubLists = new List<List<string>>();
 
             
