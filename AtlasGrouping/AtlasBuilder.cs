@@ -32,17 +32,27 @@ namespace AtlasGrouping
 
 
         // Main entry point: generate atlases from a list of image assets
-        public List<TextureAtlas> GenerateAtlases(List<List<string>> assetSubLists, Dictionary<string, ImageAsset> assetLookup, int atlasWidth, int atlasHeight)
+        public List<TextureAtlas> GenerateAtlases(List<List<string>> assetSubLists, Dictionary<string, ImageAsset> assetLookup, int atlasWidth, int atlasHeight, int hueBins)
         {
             // ---- Just an example -----
             List<TextureAtlas> allAtlases = new List<TextureAtlas>();
        
             TextureAtlas currentAtlas = new TextureAtlas { AtlasWidth = atlasWidth, AtlasHeight = atlasHeight };
 
+            int startIndex = (int)Math.Floor(0.95 * hueBins); // Start at 95% of the bins
+            List<List<string>> reorderedSubLists = new List<List<string>>();
+
+            // Reorder the sublists to start from the first red hue - 95% of 360 degrees
+            for (int i = 0; i < hueBins; i++)
+            {
+                int index = (startIndex + i) % hueBins;
+                reorderedSubLists.Add(assetSubLists[index]);
+            }
+
             int currentX = 0, currentY = 0;
             int currentRowHeight = 0;
 
-            foreach (var sublist in assetSubLists)
+            foreach (var sublist in reorderedSubLists)
             {
                 foreach (var assetId in sublist)
                 {

@@ -66,7 +66,7 @@ namespace AtlasGrouping
             var builder = new AtlasBuilder();
 
             // Now generate the atlases based on the assets grouped by hue
-            var atlases = builder.GenerateAtlases(separatedLists, assetLookup, atlasWidth, atlasHeight);
+            var atlases = builder.GenerateAtlases(separatedLists, assetLookup, atlasWidth, atlasHeight, hueBins);
 
             // Save the atlas images as .png files
             builder.SaveAtlasesAsImages(atlases, "./output_atlases");
