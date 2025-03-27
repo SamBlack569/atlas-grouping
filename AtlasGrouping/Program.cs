@@ -16,7 +16,7 @@ namespace AtlasGrouping
             // Check if the folder exists
             if (string.IsNullOrEmpty(imageFolder) || !Directory.Exists(imageFolder))
             {
-                Console.WriteLine("❌ Error: The specified folder does not exist.");
+                Console.WriteLine("Error: The specified folder does not exist.");
                 return;
             }
 

@@ -49,6 +49,11 @@ namespace AtlasGrouping
                 reorderedSubLists.Add(assetSubLists[index]);
             }
 
+            // Add special hues at the end
+            reorderedSubLists.Add(assetSubLists[hueBins]); // Black
+            reorderedSubLists.Add(assetSubLists[hueBins + 1]); // White
+            reorderedSubLists.Add(assetSubLists[hueBins + 2]); // Gray
+
             int currentX = 0, currentY = 0;
             int currentRowHeight = 0;
 
@@ -125,7 +130,7 @@ namespace AtlasGrouping
 
                 string outputPath = Path.Combine(outputFolder, $"atlas_{i}.png");
                 bitmap.Save(outputPath);
-                Console.WriteLine($"✔ Saved {outputPath}");
+                Console.WriteLine($"Saved {outputPath}");
             }
         }
 
