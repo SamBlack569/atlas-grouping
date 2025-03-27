@@ -57,6 +57,8 @@ namespace AtlasGrouping
             // Find if doesnt exist 0 in subListsSizes
             int numberOfGaps = subListsSizes.Count - subListsSizes.Count(subListSize => subListSize > 0);
 
+            List<Gap> topNGaps = new List<Gap>(); // Top N gaps in the list for placing assets
+
             // Start index for placing assets in the atlas
             int startIndex;
 
@@ -91,14 +93,16 @@ namespace AtlasGrouping
 
                 }
 
-                int maxGapSize = gaps.Max(gap => gap.Size);
-                int maxGapIndex = gaps.FindIndex(gap => gap.Size == maxGapSize);
+                // Find the largest gap
+                topNGaps = gaps.OrderByDescending(gap => gap.Size).Take(minAtlases).ToList(); // Top N gaps (N is minimum number of atlases required)
+                startIndex = topNGaps.First().Index; // Start after the largest gap
 
-                startIndex = maxGapIndex; // Start after the largest gap
             }
             else // If there are no gaps, start at 95% of the bins
             {
                 startIndex = (int)Math.Floor(0.95 * hueBins);
+
+                topNGaps.Clear(); // No gaps, so clear the list
             }
            
             List<List<string>> reorderedSubLists = new List<List<string>>();
@@ -117,9 +121,20 @@ namespace AtlasGrouping
 
             int currentX = 0, currentY = 0;
             int currentRowHeight = 0;
+            int currentSubListIdx = startIndex % hueBins;
 
             foreach (var sublist in reorderedSubLists)
             {
+                // Start a new atlas if the current sublist is a gap
+                if (topNGaps.Any(gap => gap.Index == currentSubListIdx) && (currentSubListIdx != topNGaps.First().Index))
+                {
+                    allAtlases.Add(currentAtlas); // Save the current atlas
+                    currentAtlas = new TextureAtlas { AtlasWidth = atlasWidth, AtlasHeight = atlasHeight }; // Start a new atlas
+                    currentX = 0;
+                    currentY = 0;
+                    currentRowHeight = 0;
+                }
+
                 foreach (var assetId in sublist)
                 {
                     if (!assetLookup.TryGetValue(assetId, out var asset))
@@ -159,6 +174,7 @@ namespace AtlasGrouping
                     currentX += asset.Width;
                     currentRowHeight = Math.Max(currentRowHeight, asset.Height);
                 }
+                currentSubListIdx = (currentSubListIdx + 1);
             }
 
             // Add final atlas if it has any content
