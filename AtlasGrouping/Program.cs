@@ -55,7 +55,7 @@ namespace AtlasGrouping
             }
             */
 
-            var separatedLists = ImageUtils.Separate(sortedHueAssets, hueBins);
+            var separatedLists = ImageUtils.Separate(sortedHueAssets, hueBins, assetLookup);
 
             Console.WriteLine("\n--- Grouped by Hue ---");
             for (int i = 0; i < separatedLists.Count; i++)

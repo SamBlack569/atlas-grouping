@@ -168,7 +168,7 @@ namespace AtlasGrouping
             return sortedList;
         }
 
-        public static List<List<string>> Separate(List<HueAsset> sortedList, int hueBins)
+        public static List<List<string>> Separate(List<HueAsset> sortedList, int hueBins, Dictionary<string, ImageAsset> assetLookup)
         {
             var listOfSubLists = new List<List<string>>();
 
@@ -201,6 +201,25 @@ namespace AtlasGrouping
                     Console.WriteLine($"[Warning] Hue index {idx} is out of bounds for asset {asset.AssetId} (Hue: {asset.Hue})");
                 }
             }
+
+            Console.WriteLine("Enter asset IDs (separated by commas) thatshould be together in the same sublist, then press Enter when done:");
+
+            List<string> assetsToGroup = new List<string>();
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(input)) // If user just presses Enter without typing anything, stop
+                    break;
+
+                var assetIds = input.Split(',').Select(id => id.Trim()).ToList();
+                assetsToGroup.AddRange(assetIds);
+            }
+
+            // Remove duplicates
+            assetsToGroup = assetsToGroup.Distinct().ToList();
+
 
             return listOfSubLists;
         }
