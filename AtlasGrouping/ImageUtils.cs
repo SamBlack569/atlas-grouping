@@ -184,7 +184,7 @@ namespace AtlasGrouping
                 if (asset.Hue < 0)
                 {
                     // Special Hue (-2 Black, -3 White, -4 Gray)
-                    idx = hueBins + (int)(-asset.Hue) -2;
+                    idx = hueBins + (int)(-asset.Hue) - 2;
                     // Black index = 36, White index = 37, Gray index = 38
                 }
                 else
@@ -213,14 +213,64 @@ namespace AtlasGrouping
                 if (string.IsNullOrWhiteSpace(input)) // If user just presses Enter without typing anything, stop
                     break;
 
-                var assetIds = input.Split(',').Select(id => id.Trim()).ToList();
-                assetsToGroup.AddRange(assetIds);
+                var group = input.Split(',').Select(id => id.Trim()).ToList();
+
+                if (group.Count < 2)
+                {
+                    Console.WriteLine("No assets to group.");
+                    continue;
+                }
+
+                string biggest = null;
+                int biggestArea = -1;
+
+                foreach (var id in group)
+                {
+                    if (assetLookup.TryGetValue(id, out var asset))
+                    {
+                        int area = asset.Width * asset.Height;
+                        if (area > biggestArea)
+                        {
+                            biggestArea = area;
+                            biggest = id;
+                        }
+                    }
+                }
+
+                if (biggest == null)
+                {
+                    Console.WriteLine("No valid assets from this group found in the dictionary.");
+                    continue;
+                }
+
+                // Find the sublist that contains the biggest asset
+                List<string> targetSublist = listOfSubLists.FirstOrDefault(sublist => sublist.Contains(biggest));
+                if (targetSublist == null)
+                {
+                    Console.WriteLine($"[Error] Could not find sublist for the largest asset ({biggest}).");
+                    continue;
+                }
+
+                // Remove all assets in the group from their current sublists
+                foreach (var id in group)
+                {
+                    foreach (var sublist in listOfSubLists)
+                    {
+                        sublist.Remove(id);
+                    }
+                }
+
+                // Add the group to the target sublist
+                foreach (var id in group)
+                {
+                    if (!targetSublist.Contains(id))
+                        targetSublist.Add(id);
+                }
+
+                Console.WriteLine($"^Moved group with {group.Count} assets to sublist of largest asset ({biggest}).");
+
             }
-
-            // Remove duplicates
-            assetsToGroup = assetsToGroup.Distinct().ToList();
-
-
+            
             return listOfSubLists;
         }
 
