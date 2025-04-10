@@ -208,6 +208,7 @@ namespace AtlasGrouping
 
             while (true)
             {
+                Console.Write("Group assets: ");
                 string input = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(input)) // If user just presses Enter without typing anything, stop
@@ -221,35 +222,35 @@ namespace AtlasGrouping
                     continue;
                 }
 
-                string biggest = null;
-                int biggestArea = -1;
+                // Map hueIndex -> total area
+                var hueAreaMap = new Dictionary<int, int>();
 
                 foreach (var id in group)
                 {
-                    if (assetLookup.TryGetValue(id, out var asset))
-                    {
-                        int area = asset.Width * asset.Height;
-                        if (area > biggestArea)
-                        {
-                            biggestArea = area;
-                            biggest = id;
-                        }
-                    }
+                    var hueAsset = sortedList.FirstOrDefault(a => a.AssetId == id);
+                    if (hueAsset == null)
+                        continue;
+
+                    if (!assetLookup.TryGetValue(id, out var img))
+                        continue;
+
+                    int area = img.Width * img.Height;
+                    int hueIndex = hueAsset.Hue < 0 ? hueBins + (int)(-hueAsset.Hue) - 2 : (int)hueAsset.Hue;
+
+                    if (!hueAreaMap.ContainsKey(hueIndex))
+                        hueAreaMap[hueIndex] = 0;
+
+                    hueAreaMap[hueIndex] += area;
                 }
 
-                if (biggest == null)
+                if (hueAreaMap.Count == 0)
                 {
                     Console.WriteLine("No valid assets from this group found in the dictionary.");
                     continue;
                 }
 
-                // Find the sublist that contains the biggest asset
-                List<string> targetSublist = listOfSubLists.FirstOrDefault(sublist => sublist.Contains(biggest));
-                if (targetSublist == null)
-                {
-                    Console.WriteLine($"[Error] Could not find sublist for the largest asset ({biggest}).");
-                    continue;
-                }
+                // Find the hue index with the highest total area
+                int dominantHueIndex = hueAreaMap.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
 
                 // Remove all assets in the group from their current sublists
                 foreach (var id in group)
@@ -263,17 +264,16 @@ namespace AtlasGrouping
                 // Add the group to the target sublist
                 foreach (var id in group)
                 {
-                    if (!targetSublist.Contains(id))
-                        targetSublist.Add(id);
+                    if (!listOfSubLists[dominantHueIndex].Contains(id))
+                        listOfSubLists[dominantHueIndex].Add(id);
                 }
 
-                Console.WriteLine($"^Moved group with {group.Count} assets to sublist of largest asset ({biggest}).");
+                Console.WriteLine($"Group of {group.Count} assets moved to sublist with dominant hue index {dominantHueIndex}.");
 
             }
             
             return listOfSubLists;
         }
-
 
     }
 }
