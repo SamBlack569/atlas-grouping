@@ -204,7 +204,7 @@ namespace AtlasGrouping
 
             Console.WriteLine("Enter asset IDs (separated by commas) thatshould be together in the same sublist, then press Enter when done:");
 
-            List<string> assetsToGroup = new List<string>();
+            var alreadyGroupedAssets = new HashSet<string>(); // To keep track of already grouped assets
 
             while (true)
             {
@@ -214,11 +214,20 @@ namespace AtlasGrouping
                 if (string.IsNullOrWhiteSpace(input)) // If user just presses Enter without typing anything, stop
                     break;
 
-                var group = input.Split(',').Select(id => id.Trim()).ToList();
+                var group = input.Split(',').Select(id => id.Trim()).Where(id => !string.IsNullOrEmpty(id)).ToList();
 
                 if (group.Count < 2)
                 {
                     Console.WriteLine("No assets to group.");
+                    continue;
+                }
+
+                // Check if any assets have already been grouped
+                var duplicates = group.Where(id => alreadyGroupedAssets.Contains(id)).ToList();
+                if (duplicates.Any())
+                {
+                    Console.WriteLine($"Warning: The following assets have already been grouped: {string.Join(", ", duplicates)}");
+                    Console.WriteLine("Please try again with a different group.");
                     continue;
                 }
 
@@ -264,8 +273,8 @@ namespace AtlasGrouping
                 // Add the group to the target sublist
                 foreach (var id in group)
                 {
-                    if (!listOfSubLists[dominantHueIndex].Contains(id))
-                        listOfSubLists[dominantHueIndex].Add(id);
+                    listOfSubLists[dominantHueIndex].Add(id);
+                    alreadyGroupedAssets.Add(id);
                 }
 
                 Console.WriteLine($"Group of {group.Count} assets moved to sublist with dominant hue index {dominantHueIndex}.");
