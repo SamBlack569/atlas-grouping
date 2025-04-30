@@ -211,5 +211,74 @@ namespace AtlasGrouping
             }
         }
 
+        public List<TextureAtlas> NoSortGenerateAtlases(List<List<string>> assetSubLists, Dictionary<string, ImageAsset> assetLookup, int atlasWidth, int atlasHeight, int hueBins)
+        {
+            List<TextureAtlas> allAtlases = new List<TextureAtlas>();
+
+            TextureAtlas currentAtlas = new TextureAtlas { AtlasWidth = atlasWidth, AtlasHeight = atlasHeight };
+
+            int totalAssetArea = assetSubLists.Sum(sublist => sublist.Sum(assetId =>
+            {
+                if (assetLookup.TryGetValue(assetId, out var asset))
+                {
+                    return asset.Width * asset.Height;
+                }
+                return 0;
+            }));
+
+            int atlasArea = atlasWidth * atlasHeight;
+            int minAtlases = (int)Math.Ceiling((double)totalAssetArea / atlasArea); // Minimum number of atlases required
+
+            int currentX = 0, currentY = 0;
+            int currentRowHeight = 0;
+
+            foreach (var sublist in assetSubLists)
+            {
+                foreach (var assetId in sublist)
+                {
+                    if (!assetLookup.TryGetValue(assetId, out var asset))
+                    {
+                        Console.WriteLine($"Aviso: Asset {assetId} não encontrado.");
+                        continue;
+                    }
+
+                    if (currentX + asset.Width > atlasWidth)
+                    {
+                        currentX = 0;
+                        currentY += currentRowHeight;
+                        currentRowHeight = 0;
+                    }
+
+                    if (currentY + asset.Height > atlasHeight)
+                    {
+                        allAtlases.Add(currentAtlas);
+                        currentAtlas = new TextureAtlas { AtlasWidth = atlasWidth, AtlasHeight = atlasHeight };
+                        currentX = 0;
+                        currentY = 0;
+                    }
+
+                    currentAtlas.PlacedEntries.Add(new AtlasEntry
+                    {
+                        Asset = asset,
+                        X = currentX,
+                        Y = currentY,
+                        Width = asset.Width,
+                        Height = asset.Height
+                    });
+
+                    currentX += asset.Width;
+                    currentRowHeight = Math.Max(currentRowHeight, asset.Height);
+                }
+            }
+
+            if (currentAtlas.PlacedEntries.Count > 0)
+            {
+                allAtlases.Add(currentAtlas);
+            }
+
+            return allAtlases;
+        } 
+
+
     }
 }

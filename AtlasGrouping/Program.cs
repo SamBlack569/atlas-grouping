@@ -1,4 +1,9 @@
-﻿using System.Text.Json;
+﻿//#define NO_SORT
+
+
+using System.Text.Json;
+
+
 
 namespace AtlasGrouping
 {
@@ -65,8 +70,16 @@ namespace AtlasGrouping
 
             var builder = new AtlasBuilder();
 
+#if !NO_SORT
             // Now generate the atlases based on the assets grouped by hue
             var atlases = builder.GenerateAtlases(separatedLists, assetLookup, atlasWidth, atlasHeight, hueBins);
+#else
+            var allAssetIds = assets.Select(a => a.Id).ToList();
+            var singleList = new List<List<string>> { allAssetIds };
+
+            var atlases = builder.NoSortGenerateAtlases(singleList, assetLookup, atlasWidth, atlasHeight, hueBins);
+
+#endif
 
             // Save the atlas images as .png files
             builder.SaveAtlasesAsImages(atlases, "./output_atlases");
