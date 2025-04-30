@@ -57,7 +57,9 @@ namespace AtlasGrouping
                 {
                     Color pixel = img.GetPixel(x, y);
 
-                    if(pixel.A < 50) continue; // Skip transparent pixels and almost transparent pixels
+                    // if(pixel.A < 50) continue; 
+                    // Originally, this was used to skip almost transparent pixels, but it was removed to include all pixels even with low alpha values.
+                    if (pixel.A == 0) continue; // Skip fully transparent pixels
 
                     float h, s, v;
                     RgbToHsv(pixel, out h, out s, out v);
@@ -158,7 +160,7 @@ namespace AtlasGrouping
 
             // Separate normal hues from special hues
             var normalHues = filteredList.Where(a => a.Hue >= 0).OrderBy(a => a.Hue).ToList();
-            var specialHues = filteredList.Where(a => a.Hue < 0).ToList(); // -2, -3, -4
+            var specialHues = filteredList.Where(a => a.Hue < -1).ToList(); // -2, -3, -4 (-1 is ignored)
 
             // Add special hues to the end of the list
             var sortedList = new List<HueAsset>();
