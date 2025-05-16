@@ -59,7 +59,7 @@ namespace AtlasGrouping
 
                     // if(pixel.A < 50) continue; 
                     // Originally, this was used to skip almost transparent pixels, but it was removed to include all pixels even with low alpha values.
-                    if (pixel.A == 0) continue; // Skip fully transparent pixels
+                    if (pixel.A < 5) continue; // Skip fully transparent pixels
 
                     float h, s, v;
                     RgbToHsv(pixel, out h, out s, out v);

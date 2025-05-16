@@ -1,6 +1,7 @@
 ﻿//#define NO_SORT
 
 
+using System.Diagnostics;
 using System.Text.Json;
 
 
@@ -12,6 +13,8 @@ namespace AtlasGrouping
         static void Main(string[] args)
         {
             Console.WriteLine("---- Atlas Builder ----");
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
 
             // Ask user to input the image folder path
@@ -38,7 +41,7 @@ namespace AtlasGrouping
 
             // Create a lookup dictionary for assets
             var assetLookup = assets.ToDictionary(a => a.Id, a => a);
-
+#if !NO_SORT
             var hueAssetList = new List<HueAsset>();
 
             foreach (var asset in assets)
@@ -70,12 +73,14 @@ namespace AtlasGrouping
 
             var builder = new AtlasBuilder();
 
-#if !NO_SORT
+
             // Now generate the atlases based on the assets grouped by hue
             var atlases = builder.GenerateAtlases(separatedLists, assetLookup, atlasWidth, atlasHeight, hueBins);
 #else
             var allAssetIds = assets.Select(a => a.Id).ToList();
             var singleList = new List<List<string>> { allAssetIds };
+
+            var builder = new AtlasBuilder();
 
             var atlases = builder.NoSortGenerateAtlases(singleList, assetLookup, atlasWidth, atlasHeight, hueBins);
 
@@ -83,6 +88,10 @@ namespace AtlasGrouping
 
             // Save the atlas images as .png files
             builder.SaveAtlasesAsImages(atlases, "./output_atlases");
+
+            stopwatch.Stop();
+
+            Console.WriteLine($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds");
         }
     }
 }
