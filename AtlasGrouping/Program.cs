@@ -14,8 +14,8 @@ namespace AtlasGrouping
         {
             Console.WriteLine("---- Atlas Builder ----");
 
-            Stopwatch stopwatch = Stopwatch.StartNew();
 
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             // Ask user to input the image folder path
             Console.Write("Enter the path to the image folder: ");
