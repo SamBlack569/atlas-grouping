@@ -14,12 +14,11 @@ namespace AtlasGrouping
         {
             Console.WriteLine("---- Atlas Builder ----");
 
-
-            Stopwatch stopwatch = Stopwatch.StartNew();
-
             // Ask user to input the image folder path
             Console.Write("Enter the path to the image folder: ");
             string imageFolder = Console.ReadLine()?.Trim();
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             // Check if the folder exists
             if (string.IsNullOrEmpty(imageFolder) || !Directory.Exists(imageFolder))
