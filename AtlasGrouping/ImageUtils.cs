@@ -204,7 +204,7 @@ namespace AtlasGrouping
                 }
             }
 
-            Console.WriteLine("Enter asset IDs (separated by commas) thatshould be together in the same sublist, then press Enter when done:");
+            Console.WriteLine("Type asset IDs (separated by commas) that should be grouped together in the same sublist, then press Enter when done:");
 
             var alreadyGroupedAssets = new HashSet<string>(); // To keep track of already grouped assets
 

@@ -143,7 +143,7 @@ namespace AtlasGrouping
                         continue;
                     }
 
-                    // Move to next row if width overflow
+                    // Move to next row if width overflows
                     if (currentX + asset.Width > atlasWidth)
                     {
                         currentX = 0;

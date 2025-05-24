@@ -15,7 +15,7 @@ namespace AtlasGrouping
             Console.WriteLine("---- Atlas Builder ----");
 
             // Ask user to input the image folder path
-            Console.Write("Enter the path to the image folder: ");
+            Console.Write("Type the path to the image folder and press Enter: ");
             string imageFolder = Console.ReadLine()?.Trim();
 
             Stopwatch stopwatch = Stopwatch.StartNew();
